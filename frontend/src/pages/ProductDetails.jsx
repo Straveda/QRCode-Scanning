@@ -29,7 +29,7 @@ export default function ProductDetails() {
         <div className="product-details-container">
           <div className="product-image">
             <img
-              src={`${API_URL}${product.image_url}`}
+              src={product.image_url}
               alt={product.name}
             />
           </div>
