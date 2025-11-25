@@ -9,6 +9,8 @@ function EditProduct() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
+  const [keywords, setKeywords] = useState("");
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
@@ -20,6 +22,8 @@ function EditProduct() {
         setProduct(data);
         setName(data.name);
         setPrice(data.price);
+        setVideoUrl(data.video_url);
+        setKeywords(data.keywords);
         setDescription(data.description);
         setPreview(data.image_url);
       } catch (err) {
@@ -37,6 +41,9 @@ function EditProduct() {
     formData.append("name", name);
     formData.append("price", price);
     formData.append("description", description);
+    formData.append("video_url", videoUrl);
+    formData.append("keywords", keywords);
+
     if (image) formData.append("image", image); // optional new image
 
     try {
@@ -76,6 +83,19 @@ function EditProduct() {
           placeholder="Price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="YouTube Video URL (optional)"
+          value={videoUrl}
+          onChange={(e) => setVideoUrl(e.target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="Keywords (comma separated)"
+          value={keywords}
+          onChange={(e) => setKeywords(e.target.value)}
         />
         <textarea
           placeholder="Description"

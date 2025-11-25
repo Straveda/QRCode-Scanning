@@ -73,9 +73,7 @@ function Login() {
         <button type="submit" className="login-btn">Login</button>
       </form>
 
-      <button onClick={continueAsUser} className="user-btn">
-        Continue as User
-      </button>
+      
     </div>
   );
 }

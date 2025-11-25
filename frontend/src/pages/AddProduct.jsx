@@ -7,6 +7,8 @@ function AddProduct() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [videoUrl, setVideoUrl] = useState("");
+  const [keywords, setKeywords] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,6 +23,8 @@ function AddProduct() {
     formData.append("price", price);
     formData.append("description", description);
     formData.append("image", image);
+    formData.append("video_url", videoUrl);
+    formData.append("keywords", keywords);
 
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
@@ -57,6 +61,19 @@ function AddProduct() {
           placeholder="Price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="YouTube Video URL (optional)"
+          value={videoUrl}
+          onChange={(e) => setVideoUrl(e.target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="Keywords (comma separated)"
+          value={keywords}
+          onChange={(e) => setKeywords(e.target.value)}
         />
         <textarea
           placeholder="Description"

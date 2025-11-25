@@ -72,6 +72,11 @@
   text-align: center;
 }
 
+.product-card a{
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .product-image {
   width: 100%;
   height: 180px;
@@ -157,3 +162,33 @@ button.disable-btn {
   border-radius: 6px;
   cursor: pointer;
 }
+
+.qr-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.qr-actions button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.qr-actions button:nth-child(2) {
+  background: #ff9800; /* Print */
+}
+
+.qr-actions button:nth-child(3) {
+  background: #2196f3; /* Share */
+}
+
+.qr-actions button:hover {
+  opacity: 0.9;
+}
+

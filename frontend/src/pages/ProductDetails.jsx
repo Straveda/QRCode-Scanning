@@ -36,6 +36,15 @@ export default function ProductDetails() {
           <div className="product-info">
             <h1>{product.name}</h1>
             <p className="price">₹{product.price}</p>
+            {product.video_url && (
+              <a href={product.video_url} target="_blank" rel="noopener noreferrer">
+                Watch Tutorial
+              </a>
+            )}
+
+            {product.keywords && (
+              <p>Keywords: {product.keywords}</p>
+            )}
             <p className="description">{product.description}</p>
           </div>
         </div>
