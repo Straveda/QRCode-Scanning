@@ -49,7 +49,8 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h2>Admin Login</h2>
+      <h1 className="portal-title">Welcome to SMIDI Product Portal</h1>
+      <h2 id="admin_login_heading">Admin Login</h2>
 
       <form onSubmit={handleLogin} className="login-form">
         <input

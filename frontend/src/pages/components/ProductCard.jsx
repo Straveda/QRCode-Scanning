@@ -59,16 +59,16 @@ function ProductCard({ product, isAdmin, onDelete, onDisable }) {
     <div className="product-card">
       <img src={imagePath} alt={product.name} className="product-image" />
       <h3>{product.name}</h3>
-      <p>${product.price}</p>
+      <p>₹ {product.price}</p>
       {product.video_url && (
         <a href={product.video_url} target="_blank" rel="noopener noreferrer">
           Watch Tutorial
         </a>
       )}
 
-      {product.keywords && (
-        <p>Keywords: {product.keywords}</p>
-      )}
+      {/* {product.keywords && (
+          <p>Keywords: {product.keywords}</p>
+      )} */}
 
       <div className="button-group">
         <button className="qr-btn" onClick={handleShowQR}>
@@ -77,7 +77,7 @@ function ProductCard({ product, isAdmin, onDelete, onDisable }) {
 
         {isAdmin && (
           <>
-            <button className="edit-btn" onClick={() => navigate(`/edit-product/${product.id}`)}>Edit</button>
+            <button className="edit-btn" onClick={() => navigate(`/edit-product/${product.id}`)}>Edit</button><br />
             <button className="disable-btn" onClick={() => onDisable && onDisable(product.id)}>Disable</button>
             <button className="delete-btn" onClick={() => onDelete && onDelete(product.id)}>Delete</button>
           </>
