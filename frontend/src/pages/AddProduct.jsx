@@ -46,47 +46,61 @@ function AddProduct() {
   };
 
   return (
-    <div className="add-product-container">
-      <h2>Add Product</h2>
-      <form onSubmit={handleSubmit} className="add-product-form">
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="number"
-          step="0.01"
-          placeholder="Price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="YouTube Video URL (optional)"
-          value={videoUrl}
-          onChange={(e) => setVideoUrl(e.target.value)}
-        />
+    <div className="add-product-page">
+      <div className="add-product-card">
+        <h2 className="title">Add a New Product</h2>
+        <p className="subtitle">Fill in the details below to add your product.</p>
 
-        <input
-          type="text"
-          placeholder="Keywords (comma separated)"
-          value={keywords}
-          onChange={(e) => setKeywords(e.target.value)}
-        />
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-        <button type="submit">Add Product</button>
-      </form>
+        <form onSubmit={handleSubmit} className="add-product-form">
+          <input
+            type="text"
+            placeholder="Product Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <input
+            type="number"
+            step="0.01"
+            placeholder="Price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+
+          <textarea
+            placeholder="Short Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+
+          <input
+            type="text"
+            placeholder="YouTube Video URL (optional)"
+            value={videoUrl}
+            onChange={(e) => setVideoUrl(e.target.value)}
+          />
+
+          <input
+            type="text"
+            placeholder="Keywords (comma separated)"
+            value={keywords}
+            onChange={(e) => setKeywords(e.target.value)}
+          />
+
+          <label className="file-input-label">
+            Upload Product Image
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          </label>
+
+          <button type="submit" className="submit-btn">
+            Add Product
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
