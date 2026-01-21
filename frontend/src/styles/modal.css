@@ -1,0 +1,271 @@
+/* ===================== MODAL OVERLAY ===================== */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+/* ===================== ADD PRODUCT MODAL ===================== */
+
+.modal-content {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 480px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s ease-out;
+}
+
+.modal-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.modal-subtitle {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 2px;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.9rem;
+}
+
+.required-asterisk {
+    color: #dc2626;
+    margin-left: 4px;
+}
+
+.modal-form input,
+
+.modal-form input,
+.modal-form textarea {
+    padding: 10px 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    font-family: "Inter", sans-serif;
+}
+
+.modal-form input:focus,
+.modal-form textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.modal-form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.file-input-label {
+    display: block;
+    padding: 10px 14px;
+    border: 2px dashed #4a90e2;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    color: #4a90e2;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.file-input-label:hover {
+    background: rgba(74, 144, 226, 0.05);
+    border-color: #3f7fc9;
+}
+
+.file-input-label input[type="file"] {
+    display: none;
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    width: 100%;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 0 12px;
+    height: 48px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.cancel-btn {
+    background: #dc2626 !important;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #b91c1c !important;
+    transform: scale(1.02);
+}
+
+.submit-btn {
+    background: #3b82f6 !important;
+    color: white;
+}
+
+.submit-btn:hover {
+    background: #2563eb !important;
+    transform: scale(1.02);
+}
+
+/* ===================== CONFIRM DIALOG ===================== */
+
+.confirm-dialog {
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: popIn 0.3s ease-out;
+    text-align: center;
+}
+
+.confirm-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 12px;
+}
+
+.confirm-message {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.confirm-actions button {
+    padding: 11px 24px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    min-width: 100px;
+}
+
+.confirm-actions .cancel-btn {
+    background: #e5e7eb !important;
+    color: #374151;
+}
+
+.confirm-actions .cancel-btn:hover {
+    background: #d1d5db !important;
+    transform: scale(1.05);
+}
+
+.confirm-btn {
+    background: #e74c3c;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background: #c0392b;
+    transform: scale(1.05);
+}
+
+/* ===================== ANIMATIONS ===================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===================== SCROLLBAR STYLING ===================== */
+
+.modal-content::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+}
