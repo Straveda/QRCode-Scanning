@@ -126,9 +126,26 @@
   font-size: 0.95rem;
   line-height: 1.6;
   color: #555;
-  white-space: pre-line;
-  /* Handle line breaks */
 }
+
+.pdp-description-paragraph {
+  text-align: justify;
+  text-justify: inter-word;
+  white-space: pre-line;
+}
+
+.pdp-description-points ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.pdp-description-points li {
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 0.95rem;
+}
+
 
 .pdp-keywords-section {
   margin-top: 15px;

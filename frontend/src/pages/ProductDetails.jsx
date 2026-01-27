@@ -50,8 +50,16 @@ export default function ProductDetails() {
 
           <div className="pdp-description-section">
             <h3 className="section-label">Description</h3>
-            <div className="pdp-description-text">
-              {product.description}
+            <div className={`pdp-description-text ${product.description_type === 'points' ? 'pdp-description-points' : 'pdp-description-paragraph'}`}>
+              {product.description_type === 'points' ? (
+                <ul>
+                  {product.description.split('\n').filter(p => p.trim()).map((point, index) => (
+                    <li key={index}>{point}</li>
+                  ))}
+                </ul>
+              ) : (
+                product.description
+              )}
             </div>
             {product.keywords && (
               <div className="pdp-keywords-section">

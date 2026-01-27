@@ -6,6 +6,7 @@ function EditProductModal({ isOpen, onClose, productId, onProductUpdated }) {
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
+    const [descriptionType, setDescriptionType] = useState("paragraph");
     const [image, setImage] = useState(null);
     const [videoUrl, setVideoUrl] = useState("");
     const [keywords, setKeywords] = useState("");
@@ -28,6 +29,7 @@ function EditProductModal({ isOpen, onClose, productId, onProductUpdated }) {
             setName(data.name);
             setPrice(data.price);
             setDescription(data.description);
+            setDescriptionType(data.description_type || "paragraph");
             setVideoUrl(data.video_url || "");
             setKeywords(data.keywords || "");
             setPreview(data.image_url);
@@ -50,6 +52,7 @@ function EditProductModal({ isOpen, onClose, productId, onProductUpdated }) {
         formData.append("name", name);
         formData.append("price", price);
         formData.append("description", description);
+        formData.append("description_type", descriptionType);
         formData.append("video_url", videoUrl);
         formData.append("keywords", keywords);
 
@@ -68,6 +71,7 @@ function EditProductModal({ isOpen, onClose, productId, onProductUpdated }) {
                 setName("");
                 setPrice("");
                 setDescription("");
+                setDescriptionType("paragraph");
                 setImage(null);
                 setVideoUrl("");
                 setKeywords("");
@@ -116,10 +120,33 @@ function EditProductModal({ isOpen, onClose, productId, onProductUpdated }) {
                         />
 
                         <label className="input-label">Description<span className="required-asterisk">*</span></label>
+                        <div className="description-type-selector">
+                            <label className={`type-option ${descriptionType === "paragraph" ? "active" : ""}`}>
+                                <input
+                                    type="radio"
+                                    name="descriptionType"
+                                    value="paragraph"
+                                    checked={descriptionType === "paragraph"}
+                                    onChange={(e) => setDescriptionType(e.target.value)}
+                                />
+                                Paragraph
+                            </label>
+                            <label className={`type-option ${descriptionType === "points" ? "active" : ""}`}>
+                                <input
+                                    type="radio"
+                                    name="descriptionType"
+                                    value="points"
+                                    checked={descriptionType === "points"}
+                                    onChange={(e) => setDescriptionType(e.target.value)}
+                                />
+                                Points
+                            </label>
+                        </div>
                         <textarea
-                            placeholder="Short Description *"
+                            placeholder={descriptionType === "paragraph" ? "Long Description *" : "Enter points separated by new lines *"}
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                            style={{ textAlign: descriptionType === "paragraph" ? "justify" : "left" }}
                         />
 
                         <label className="input-label">YouTube Video URL</label>
