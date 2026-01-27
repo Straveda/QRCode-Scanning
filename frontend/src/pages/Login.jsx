@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "../styles/Login.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -7,12 +8,12 @@ const API_URL = import.meta.env.VITE_API_URL;
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
+    setIsLoading(true);
 
     try {
       const res = await fetch(`${API_URL}/api/users/login`, {
@@ -24,7 +25,8 @@ function Login() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message || "Login failed");
+        toast.error(data.message || "Login failed");
+        setIsLoading(false);
         return;
       }
 
@@ -32,10 +34,13 @@ function Login() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
+      toast.success("Login successful! Welcome back.");
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
-      setError("Something went wrong");
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -48,33 +53,77 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <h1 className="portal-title">Welcome to SMIDI Product Portal</h1>
-      <h2 id="admin_login_heading">Admin Login</h2>
+    <div className="login-page-wrapper">
+      <div className="login-left-panel">
+        <div className="brand-content">
+          <h1 className="brand-title">Welcome to SMIDI Product Portal</h1>
+          <p className="brand-tagline">Manage your dynamic QR inventory with ease and precision.</p>
 
-      <form onSubmit={handleLogin} className="login-form">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+          <ul className="feature-list">
+            <li>
+              <span className="feature-icon">🚀</span>
+              <div className="feature-text">
+                <strong>Dynamic QR Management</strong>
+                <span>Easily create and update product QR codes in real-time.</span>
+              </div>
+            </li>
+            <li>
+              <span className="feature-icon">📊</span>
+              <div className="feature-text">
+                <strong>Intuitive Dashboard</strong>
+                <span>Monitor all your products and their status at a glance.</span>
+              </div>
+            </li>
+            <li>
+              <span className="feature-icon">📱</span>
+              <div className="feature-text">
+                <strong>Mobile Optimized</strong>
+                <span>Responsive interface designed for seamless mobile interaction.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+      <div className="login-right-panel">
+        <div className="login-card">
+          <h2 id="admin_login_heading">Admin Login</h2>
+          <p className="subtitle">Please enter your details to access the portal.</p>
 
-        {error && <p className="error">{error}</p>}
+          <form onSubmit={handleLogin} className="login-form">
+            <div className="input-group">
+              <label>Email Address</label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
 
-        <button type="submit" className="login-btn">Login</button>
-      </form>
+            <div className="input-group">
+              <label>Password</label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
 
-      
+            <button type="submit" className="login-btn" disabled={isLoading}>
+              {isLoading ? (
+                <span className="btn-loading-flex">
+                  <span className="spinner"></span>
+                  Logging in...
+                </span>
+              ) : "Login to Dashboard"}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

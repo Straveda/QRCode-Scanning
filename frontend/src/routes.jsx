@@ -1,18 +1,44 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import AddProduct from "./pages/AddProduct";
-import EditProduct from "./pages/EditProduct";
 import ProductDetails from "./pages/ProductDetails";
+import DisabledProducts from "./pages/DisabledProducts";
+import ProtectedRoute from "./pages/components/ProtectedRoute";
 
 function AppRoutes() {
+  // Check if user is logged in for initial redirect
+  const isLoggedIn = () => {
+    return localStorage.getItem("user") !== null;
+  };
+
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/add-product" element={<AddProduct />} />
-      <Route path="/edit-product/:id" element={<EditProduct />} />
+      <Route path="/" element={isLoggedIn() ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+      <Route path="/login" element={<Login />} />
+
+      {/* Protected Routes */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/disabled-products"
+        element={
+          <ProtectedRoute>
+            <DisabledProducts />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Public / Semi-Public Routes */}
       <Route path="/product/:id" element={<ProductDetails />} />
+
+      {/* Catch-all redirect */}
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }

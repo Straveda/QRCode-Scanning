@@ -1,171 +1,254 @@
-/* Page background */
 .pdp-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7ff, #eef2ff);
-  padding: 20px;
-}
-
-/* Header section */
-.pdp-header {
-  text-align: center;
-  margin-bottom: 25px;
+  height: 100vh;
+  /* Fixed height to enable internal scroll */
+  overflow-y: auto;
+  background: #ffffff;
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
   position: relative;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  -webkit-overflow-scrolling: touch;
 }
 
-.pdp-back-btn {
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: #444;
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: 0.2s ease;
-}
-
-.pdp-back-btn:hover {
-  background: #222;
-}
-
-.pdp-main-title {
-  margin: 0;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #222;
-}
-
-.pdp-subtitle {
-  margin: 4px 0 0;
-  font-size: 1rem;
-  color: #666;
-}
-
-/* Product card */
-.pdp-card {
-  max-width: 1000px;
-  background: #fff;
-  margin: auto;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.08);
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap; /* responsiveness */
-}
-
-/* Image section */
-.pdp-image-section {
-  flex: 1 1 350px;
-  display: flex;
-  justify-content: center;
-}
-
-.pdp-image-section img {
-  width: 100%;
-  max-width: 380px;
-  border-radius: 14px;
-  object-fit: cover;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
-
-/* Info section */
-.pdp-info-section {
-  flex: 1 1 350px;
+/* Header */
+.pdp-header {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 20px 5px;
+  /* Reduced bottom padding */
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.pdp-product-name {
+.pdp-header-title {
+  font-size: 2.22rem;
+  /* Significantly bigger brand name */
+  font-weight: 800;
+  color: #1a1a1a;
   margin: 0;
-  font-size: 1.7rem;
-  color: #222;
-  text-align: left;
-}
-
-.pdp-price {
-  font-size: 1.4rem;
-  color: #28a745;
-  font-weight: 600;
-  text-align: left;
-}
-
-.pdp-description {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #444;
-  max-width: 500px;
-  text-align: left;
-}
-
-/* Keywords badge */
-.pdp-keywords {
-  background: #eef5ff;
-  padding: 10px 14px;
-  border-radius: 10px;
-  color: #333;
-  font-size: 0.95rem;
-  border-left: 4px solid #467bff;
-  text-align: left;
-}
-
-/* Tutorial link */
-.pdp-tutorial-btn {
-  background: #007bff;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  width: fit-content;
-  box-shadow: 0 4px 10px rgba(0,123,255,0.3);
-}
-
-.pdp-tutorial-btn:hover {
-  background: #0056b3;
-}
-
-/* Loading state */
-.pdp-loading {
   text-align: center;
-  margin-top: 50px;
+  letter-spacing: -1.2px;
+  line-height: 1.15;
+}
+
+.pdp-header-subtitle {
+  font-size: 0.9rem;
+  /* Smaller subtitle for contrast */
+  color: #666;
+  margin: 6px 0 0 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Ensure body doesn't block scrolling if dashboard.css is loaded */
+:global(body) {
+  overflow: auto !important;
+}
+
+/* Container */
+.pdp-container {
+  padding: 0 20px 20px;
+  /* Removed top padding to close gap */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Image Card */
+.pdp-image-card {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.pdp-image-card img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+}
+
+/* Info Section */
+.pdp-info {
+  text-align: left;
+}
+
+.pdp-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
+
+.pdp-price-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.pdp-price-label {
+  color: #1a1a1a;
   font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.pdp-price-value {
+  color: #2e7d32;
+  /* Green from design */
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* Description */
+.pdp-description-section {
+  margin-bottom: 30px;
+}
+
+.section-label {
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.pdp-description-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: #555;
 }
 
-/* FULL RESPONSIVE FIXES */
-@media (max-width: 860px) {
-  .pdp-card {
-    flex-direction: column;
-    text-align: center;
-  }
+.pdp-description-paragraph {
+  text-align: justify;
+  text-justify: inter-word;
+  white-space: pre-line;
+}
 
-  .pdp-info-section {
-    align-items: center;
-    text-align: center;
-  }
+.pdp-description-points ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
 
-  .pdp-description {
-    max-width: 90%;
-  }
+.pdp-description-points li {
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 0.95rem;
+}
 
-  .pdp-product-name {
-    text-align: center;
-  }
 
-  .pdp-back-btn{
-    display: none;
+.pdp-keywords-section {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  color: #666;
+  background: #f9fafb;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Action Buttons */
+.pdp-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.pdp-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.1s;
+}
+
+.pdp-btn:active {
+  transform: scale(0.98);
+}
+
+.btn-outline {
+  background: white;
+  border: 1px solid #2e7d32;
+  color: #2e7d32;
+}
+
+.btn-solid {
+  background: #2e7d32;
+  border: 1px solid #2e7d32;
+  color: white;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+}
+
+/* Loading */
+.pdp-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* RESPONSIVENESS */
+
+/* Tablets & Smaller Laptops */
+@media (max-width: 768px) {
+  .pdp-container {
+    padding: 20px 15px;
   }
 }
 
-@media (max-width: 500px) {
-  .pdp-main-title {
-    font-size: 1.5rem;
+/* Mobile Phones (Standard) */
+@media (max-width: 480px) {
+  .pdp-header-title {
+    font-size: 0.95rem;
   }
-  .pdp-subtitle {
-    font-size: 0.9rem;
+
+  .pdp-image-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .pdp-image-card img {
+    max-height: 280px;
+  }
+
+  .pdp-title {
+    font-size: 1.35rem;
+  }
+
+  .pdp-price-value {
+    font-size: 1.6rem;
+  }
+}
+
+/* Small Phones (iPhone SE, old Androids) */
+@media (max-width: 360px) {
+  .pdp-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pdp-title {
+    font-size: 1.25rem;
+  }
+
+  .pdp-price-value {
+    font-size: 1.4rem;
   }
 }
