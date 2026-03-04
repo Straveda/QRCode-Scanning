@@ -58,6 +58,9 @@ async function setupDB() {
         qr_code_url TEXT,
         video_url TEXT,
         keywords TEXT,
+        dose JSONB DEFAULT '[]',
+        composition JSONB DEFAULT '[]',
+        specifications JSONB DEFAULT '[]',
         is_disabled BOOLEAN DEFAULT false,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );

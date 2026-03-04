@@ -213,9 +213,103 @@ body {
   flex-direction: column;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   height: auto;
-  min-height: 480px;
+  min-height: 420px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   overflow: visible;
+  position: relative;
+}
+
+/* ===================== KEBAB MENU ===================== */
+
+.kebab-menu {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 100;
+}
+
+.kebab-trigger {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  transition: background 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+
+.kebab-trigger:hover {
+  background: #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+}
+
+.kebab-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  min-width: 140px;
+  animation: kebabFadeIn 0.15s ease forwards;
+  z-index: 200;
+}
+
+@keyframes kebabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.kebab-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+  color: #1e293b;
+}
+
+.kebab-item:not(:last-child) {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.kebab-disable:hover {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.kebab-enable:hover {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.kebab-delete:hover {
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
 .product-card:hover {
@@ -271,6 +365,399 @@ body {
 .button-group {
   margin-top: 16px;
   padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.button-group button {
+  padding: 10px 6px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.button-group button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.qr-btn {
+  background: #16a34a;
+  color: white;
+}
+
+.qr-btn:hover {
+  background: #15803d;
+}
+
+.edit-btn {
+  background: #eab308;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #ca8a04;
+}
+
+/* ===================== KEBAB MENU ===================== */
+
+.kebab-menu {
+  position: absolute;
+  top: 10px;
+  /* Adjusted for tighter padding */
+  right: 10px;
+  z-index: 100;
+}
+
+.kebab-trigger {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  width: 28px;
+  /* Reduced from 34px */
+  height: 28px;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  transition: background 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+
+.kebab-trigger:hover {
+  background: #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+}
+
+.kebab-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  min-width: 130px;
+  animation: kebabFadeIn 0.15s ease forwards;
+  z-index: 200;
+}
+
+@keyframes kebabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.kebab-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  /* Tighter item padding */
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+  color: #1e293b;
+}
+
+.kebab-item:not(:last-child) {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.kebab-disable:hover {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.kebab-enable:hover {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.kebab-delete:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  /* Reduced hover lift */
+  box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 8px -5px rgba(0, 0, 0, 0.04);
+  border-color: #cbd5e1;
+}
+
+.product-image {
+  width: 100%;
+  height: 180px;
+  /* Reduced from 220px */
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  /* Reduced padding */
+  margin-bottom: 12px;
+  /* Reduced from 18px */
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.03);
+}
+
+.product-card h3 {
+  font-size: 1rem;
+  /* Reduced from 1.15rem */
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+  /* Reduced from 8px */
+  line-height: 1.3;
+  display: block;
+  width: 100%;
+}
+
+.product-card p {
+  color: #64748b;
+  font-size: 0.85rem;
+  /* Reduced from 0.9rem */
+  margin-bottom: auto;
+  line-height: 1.4;
+}
+
+.price-tag {
+  display: block;
+  font-size: 1.25rem;
+  /* Reduced from 1.6rem */
+  font-weight: 800;
+  color: #0f172a;
+  margin: 10px 0;
+  /* Reduced from 14px */
+}
+
+/* ===================== BUTTON GROUP (2x2 STABLE) ===================== */
+
+.button-group {
+  margin-top: 12px;
+  /* Reduced from 16px */
+  padding-top: 12px;
+  /* Reduced from 16px */
+  border-top: 1px solid #f1f5f9;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  /* Reduced gap */
+}
+
+.button-group button {
+  padding: 8px 4px;
+  /* Reduced padding */
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.button-group button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+.qr-btn {
+  background: #16a34a;
+  color: white;
+}
+
+.qr-btn:hover {
+  background: #15803d;
+}
+
+.edit-btn {
+  background: #eab308;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #ca8a04;
+}
+
+/* ===================== KEBAB MENU ===================== */
+
+.kebab-menu {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 100;
+}
+
+.kebab-trigger {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  transition: background 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+
+.kebab-trigger:hover {
+  background: #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+}
+
+.kebab-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  min-width: 140px;
+  animation: kebabFadeIn 0.15s ease forwards;
+  z-index: 200;
+}
+
+@keyframes kebabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.kebab-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+  color: #1e293b;
+}
+
+.kebab-item:not(:last-child) {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.kebab-disable:hover {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.kebab-enable:hover {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.kebab-delete:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: #cbd5e1;
+}
+
+.product-image {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 18px;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  display: block;
+  width: 100%;
+}
+
+.product-card p {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: auto;
+  /* Pushes price/buttons down */
+  line-height: 1.5;
+}
+
+.price-tag {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 10px 0 2px 0 !important;
+}
+
+/* ===================== BUTTON GROUP (2x2 STABLE) ===================== */
+
+.button-group {
+  margin-top: 4px;
+  padding-top: 4px;
   border-top: 1px solid #f1f5f9;
   display: grid;
   grid-template-columns: 1fr 1fr;

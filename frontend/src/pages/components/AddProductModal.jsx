@@ -10,7 +10,19 @@ function AddProductModal({ isOpen, onClose, onProductAdded }) {
     const [image, setImage] = useState(null);
     const [videoUrl, setVideoUrl] = useState("");
     const [keywords, setKeywords] = useState("");
+    const [doses, setDoses] = useState([{ crops: "", dose: "" }]);
+    const [compositions, setCompositions] = useState([{ ingredients: "", content: "" }]);
+    const [specifications, setSpecifications] = useState([{ parameters: "", value: "" }]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const addDoseRow = () => setDoses([...doses, { crops: "", dose: "" }]);
+    const removeDoseRow = (index) => setDoses(doses.filter((_, i) => i !== index));
+
+    const addCompositionRow = () => setCompositions([...compositions, { ingredients: "", content: "" }]);
+    const removeCompositionRow = (index) => setCompositions(compositions.filter((_, i) => i !== index));
+
+    const addSpecificationRow = () => setSpecifications([...specifications, { parameters: "", value: "" }]);
+    const removeSpecificationRow = (index) => setSpecifications(specifications.filter((_, i) => i !== index));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,9 +37,13 @@ function AddProductModal({ isOpen, onClose, onProductAdded }) {
         formData.append("price", price);
         formData.append("description", description);
         formData.append("description_type", descriptionType);
-        formData.append("image", image);
         formData.append("video_url", videoUrl);
         formData.append("keywords", keywords);
+        formData.append("dose", JSON.stringify(doses));
+        formData.append("composition", JSON.stringify(compositions));
+        formData.append("specifications", JSON.stringify(specifications));
+
+        if (image) formData.append("image", image);
 
         setIsSubmitting(true);
         try {
@@ -46,6 +62,9 @@ function AddProductModal({ isOpen, onClose, onProductAdded }) {
                 setImage(null);
                 setVideoUrl("");
                 setKeywords("");
+                setDoses([{ crops: "", dose: "" }]);
+                setCompositions([{ ingredients: "", content: "" }]);
+                setSpecifications([{ parameters: "", value: "" }]);
                 onClose();
                 onProductAdded(); // Refresh product list
             } else {
@@ -131,6 +150,156 @@ function AddProductModal({ isOpen, onClose, onProductAdded }) {
                         value={keywords}
                         onChange={(e) => setKeywords(e.target.value)}
                     />
+
+                    {/* Dose Section */}
+                    <div className="dynamic-section">
+                        <div className="section-header">
+                            <label className="input-label">8. Dose:</label>
+                            <button type="button" className="add-row-btn" onClick={addDoseRow}>+ Add Row</button>
+                        </div>
+                        <table className="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Crops</th>
+                                    <th>Dose</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {doses.map((row, index) => (
+                                    <tr key={index}>
+                                        <td>({index + 1})</td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                value={row.crops}
+                                                onChange={(e) => {
+                                                    const newDoses = [...doses];
+                                                    newDoses[index].crops = e.target.value;
+                                                    setDoses(newDoses);
+                                                }}
+                                            />
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                value={row.dose}
+                                                onChange={(e) => {
+                                                    const newDoses = [...doses];
+                                                    newDoses[index].dose = e.target.value;
+                                                    setDoses(newDoses);
+                                                }}
+                                            />
+                                        </td>
+                                        <td>
+                                            <button type="button" className="remove-row-btn" onClick={() => removeDoseRow(index)}>×</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {/* Composition Section */}
+                    <div className="dynamic-section">
+                        <div className="section-header">
+                            <label className="input-label">5. Composition:</label>
+                            <button type="button" className="add-row-btn" onClick={addCompositionRow}>+ Add Row</button>
+                        </div>
+                        <table className="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Ingredients</th>
+                                    <th>Content</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {compositions.map((row, index) => (
+                                    <tr key={index}>
+                                        <td>({index + 1})</td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                value={row.ingredients}
+                                                onChange={(e) => {
+                                                    const newComp = [...compositions];
+                                                    newComp[index].ingredients = e.target.value;
+                                                    setCompositions(newComp);
+                                                }}
+                                            />
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                value={row.content}
+                                                onChange={(e) => {
+                                                    const newComp = [...compositions];
+                                                    newComp[index].content = e.target.value;
+                                                    setCompositions(newComp);
+                                                }}
+                                            />
+                                        </td>
+                                        <td>
+                                            <button type="button" className="remove-row-btn" onClick={() => removeCompositionRow(index)}>×</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {/* Specifications Section */}
+                    <div className="dynamic-section">
+                        <div className="section-header">
+                            <label className="input-label">6. Specifications:</label>
+                            <button type="button" className="add-row-btn" onClick={addSpecificationRow}>+ Add Row</button>
+                        </div>
+                        <table className="dynamic-table">
+                            <thead>
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Parameters</th>
+                                    <th>Value</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {specifications.map((row, index) => (
+                                    <tr key={index}>
+                                        <td>({index + 1})</td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                value={row.parameters}
+                                                onChange={(e) => {
+                                                    const newSpecs = [...specifications];
+                                                    newSpecs[index].parameters = e.target.value;
+                                                    setSpecifications(newSpecs);
+                                                }}
+                                            />
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                value={row.value}
+                                                onChange={(e) => {
+                                                    const newSpecs = [...specifications];
+                                                    newSpecs[index].value = e.target.value;
+                                                    setSpecifications(newSpecs);
+                                                }}
+                                            />
+                                        </td>
+                                        <td>
+                                            <button type="button" className="remove-row-btn" onClick={() => removeSpecificationRow(index)}>×</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
 
                     <label className="input-label">Product Image<span className="required-asterisk">*</span></label>
                     <label className="file-input-label">
