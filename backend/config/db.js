@@ -6,7 +6,9 @@ const { Pool } = pkg;
 
 export const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: false   // REQUIRED for Render external DB
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 pool.connect()

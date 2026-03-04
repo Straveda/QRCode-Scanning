@@ -13,37 +13,34 @@
 /* Header */
 .pdp-header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding: 25px 20px 5px;
-  /* Reduced bottom padding */
+  justify-content: flex-start;
+  padding: 10px 20px;
   background: #ffffff;
   position: sticky;
   top: 0;
   z-index: 10;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.pdp-header-title {
-  font-size: 2.22rem;
-  /* Significantly bigger brand name */
-  font-weight: 800;
-  color: #1a1a1a;
-  margin: 0;
-  text-align: center;
-  letter-spacing: -1.2px;
-  line-height: 1.15;
+.pdp-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
 }
 
-.pdp-header-subtitle {
-  font-size: 0.9rem;
-  /* Smaller subtitle for contrast */
+.pdp-page-title {
+  font-size: 0.85rem;
   color: #666;
-  margin: 6px 0 0 0;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
+  text-align: center;
+  margin: -15px 0 5px 0;
 }
+
+
 
 /* Ensure body doesn't block scrolling if dashboard.css is loaded */
 :global(body) {
@@ -90,25 +87,7 @@
   line-height: 1.3;
 }
 
-.pdp-price-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 25px;
-}
 
-.pdp-price-label {
-  color: #1a1a1a;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.pdp-price-value {
-  color: #2e7d32;
-  /* Green from design */
-  font-size: 1.8rem;
-  font-weight: 700;
-}
 
 /* Description */
 .pdp-description-section {
@@ -232,9 +211,7 @@
     font-size: 1.35rem;
   }
 
-  .pdp-price-value {
-    font-size: 1.6rem;
-  }
+
 }
 
 /* Small Phones (iPhone SE, old Androids) */
@@ -248,7 +225,45 @@
     font-size: 1.25rem;
   }
 
-  .pdp-price-value {
-    font-size: 1.4rem;
-  }
+
+}
+
+/* Details Tables */
+.pdp-details-section {
+  margin-top: 25px;
+}
+
+.pdp-details-section .section-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.pdp-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border: 1px solid #333;
+}
+
+.pdp-details-table th,
+.pdp-details-table td {
+  border: 1px solid #333;
+  padding: 12px;
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.pdp-details-table th {
+  background: #f4f4f4;
+  font-weight: 700;
+  color: #000;
+}
+
+.pdp-details-table tr td:first-child,
+.pdp-details-table tr th:first-child {
+  width: 60px;
+  text-align: center;
 }
