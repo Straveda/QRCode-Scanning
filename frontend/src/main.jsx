@@ -8,7 +8,7 @@ import "./styles/Login.css"; // keep global or page CSS imports as needed
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Router>
+    <Router basename="/qr">
       <AppRoutes />
       <ToastContainer
         position="top-right"
