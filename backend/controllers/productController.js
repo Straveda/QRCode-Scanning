@@ -4,18 +4,18 @@ import { generateQRCode } from "../utils/qrGenerator.js";
 // Add product (with image upload)
 export const addProduct = async (req, res) => {
   try {
-    const { name, price, description, description_type, video_url, keywords } = req.body;
+    const { name, price, description,video_url,keywords } = req.body;
     const file = req.file;
 
     if (!file) return res.status(400).json({ error: "Image file required" });
 
     // Cloudinary automatically gives full URL
-    const image_url = file.path;
+    const image_url = file.path; 
 
     // Insert product first (QR after ID is known)
     const result = await pool.query(
-      "INSERT INTO products (name, price, description, description_type, image_url, video_url, keywords) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id",
-      [name, price, description, description_type, image_url, video_url, keywords]
+      "INSERT INTO products (name, price, description, image_url, video_url, keywords) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
+      [name, price, description, image_url, video_url, keywords]
     );
 
     const productId = result.rows[0].id;
@@ -56,19 +56,19 @@ export const getProductById = async (req, res) => {
 export const editProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, price, description, description_type, video_url, keywords } = req.body;
+    const { name, price, description,video_url,keywords } = req.body;
     let image_url;
 
     if (req.file) {
       image_url = req.file.path;
       await pool.query(
-        "UPDATE products SET name=$1, price=$2, description=$3, description_type=$4, image_url=$5, video_url=$6, keywords=$7 WHERE id=$8",
-        [name, price, description, description_type, image_url, video_url, keywords, id]
+        "UPDATE products SET name=$1, price=$2, description=$3, image_url=$4, video_url=$5, keywords=$6 WHERE id=$7",
+        [name, price, description, image_url,video_url,keywords, id]
       );
     } else {
       await pool.query(
-        "UPDATE products SET name=$1, price=$2, description=$3, description_type=$4, video_url=$5, keywords=$6 WHERE id=$7",
-        [name, price, description, description_type, video_url, keywords, id]
+        "UPDATE products SET name=$1, price=$2, description=$3, video_url=$4, keywords=$5 WHERE id=$6",
+        [name, price, description,video_url,keywords, id]
       );
     }
 

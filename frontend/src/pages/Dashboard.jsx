@@ -22,6 +22,8 @@ function Dashboard() {
   const [editProductId, setEditProductId] = useState(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
+  const [showDisableConfirmDialog, setShowDisableConfirmDialog] = useState(false);
+  const [productToDisable, setProductToDisable] = useState(null);
   const [selectedQR, setSelectedQR] = useState(null); // { product, originRect }
 
   const navigate = useNavigate();
@@ -86,24 +88,26 @@ function Dashboard() {
     }
   };
 
-  const handleDisable = async (id) => {
+  const handleDisable = (id) => {
+    setProductToDisable(id);
+    setShowDisableConfirmDialog(true);
+  };
+
+  const confirmDisable = async () => {
+    if (!productToDisable) return;
     try {
-      const res = await fetch(`${API_URL}/api/products/${id}/disable`, {
+      const res = await fetch(`${API_URL}/api/products/${productToDisable}/disable`, {
         method: "PUT",
       });
-
-      if (!res.ok) {
-        throw new Error("Failed to disable product");
-      }
-
+      if (!res.ok) throw new Error("Failed to disable product");
       toast.success("Product disabled successfully!");
-
-      // Refresh the product list
       fetchProducts();
-
     } catch (error) {
       console.error("Error disabling product:", error);
       toast.error("Failed to disable product. Try again.");
+    } finally {
+      setShowDisableConfirmDialog(false);
+      setProductToDisable(null);
     }
   };
 
@@ -188,6 +192,18 @@ function Dashboard() {
         onCancel={() => {
           setShowConfirmDialog(false);
           setProductToDelete(null);
+        }}
+      />
+
+      {/* Confirm Disable Dialog */}
+      <ConfirmDialog
+        isOpen={showDisableConfirmDialog}
+        title="Disable Product"
+        message="Are you sure you want to disable this product? It will be hidden from the public listing."
+        onConfirm={confirmDisable}
+        onCancel={() => {
+          setShowDisableConfirmDialog(false);
+          setProductToDisable(null);
         }}
       />
 

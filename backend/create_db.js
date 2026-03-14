@@ -53,11 +53,8 @@ async function setupDB() {
         name TEXT NOT NULL,
         price NUMERIC(10,2) NOT NULL,
         description TEXT,
-        description_type TEXT DEFAULT 'paragraph',
         image_url TEXT,
         qr_code_url TEXT,
-        video_url TEXT,
-        keywords TEXT,
         is_disabled BOOLEAN DEFAULT false,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );

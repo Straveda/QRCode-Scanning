@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../styles/productDetails.css";
+import logo from "../assets/logo.jpeg";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -26,14 +27,14 @@ export default function ProductDetails() {
 
   return (
     <div className="pdp-page">
-      {/* Mobile Header */}
-      {/* Mobile Header */}
+      {/* Header */}
       <div className="pdp-header">
-        <h1 className="pdp-header-title">SMIDI Product Portal</h1>
-        <p className="pdp-header-subtitle">Product Details</p>
+        <img src={logo} alt="SMIDI Logo" className="pdp-logo" />
       </div>
 
       <div className="pdp-container">
+        <p className="pdp-page-title">Product Details</p>
+
         {/* Product Image Card */}
         <div className="pdp-image-card">
           <img src={product.image_url} alt={product.name} />
@@ -43,10 +44,7 @@ export default function ProductDetails() {
         <div className="pdp-info">
           <h2 className="pdp-title">{product.name}</h2>
 
-          <div className="pdp-price-row">
-            <span className="pdp-price-label">Price</span>
-            <span className="pdp-price-value">₹{product.price}</span>
-          </div>
+
 
           <div className="pdp-description-section">
             <h3 className="section-label">Description</h3>
@@ -61,12 +59,89 @@ export default function ProductDetails() {
                 product.description
               )}
             </div>
-            {product.keywords && (
-              <div className="pdp-keywords-section">
-                <strong>Keywords: </strong> {product.keywords}
-              </div>
-            )}
           </div>
+
+          {/* Dose Table */}
+          {product.dose && product.dose.length > 0 && product.dose.some(d => d.crops || d.dose) && (
+            <div className="pdp-details-section">
+              <h3 className="section-label">Dose</h3>
+              <table className="pdp-details-table">
+                <thead>
+                  <tr>
+                    <th>S. No.</th>
+                    <th>Crops</th>
+                    <th>Dose</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {product.dose.map((item, index) => (
+                    <tr key={index}>
+                      <td>({index + 1})</td>
+                      <td>{item.crops}</td>
+                      <td>{item.dose}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Composition Table */}
+          {product.composition && product.composition.length > 0 && product.composition.some(c => c.ingredients || c.content) && (
+            <div className="pdp-details-section">
+              <h3 className="section-label">Composition</h3>
+              <table className="pdp-details-table">
+                <thead>
+                  <tr>
+                    <th>S. No.</th>
+                    <th>Ingredients</th>
+                    <th>Content</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {product.composition.map((item, index) => (
+                    <tr key={index}>
+                      <td>({index + 1})</td>
+                      <td>{item.ingredients}</td>
+                      <td>{item.content}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Specifications Table */}
+          {product.specifications && product.specifications.length > 0 && product.specifications.some(s => s.parameters || s.value) && (
+            <div className="pdp-details-section">
+              <h3 className="section-label">Specifications</h3>
+              <table className="pdp-details-table">
+                <thead>
+                  <tr>
+                    <th>S. No.</th>
+                    <th>Parameters</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {product.specifications.map((item, index) => (
+                    <tr key={index}>
+                      <td>({index + 1})</td>
+                      <td>{item.parameters}</td>
+                      <td>{item.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Keywords */}
+          {/*{product.keywords && (
+            <div className="pdp-keywords-section">
+              <strong>Keywords: </strong> {product.keywords}
+            </div>*/}
+          {/*)}*/}
         </div>
 
         {/* Bottom Actions */}
