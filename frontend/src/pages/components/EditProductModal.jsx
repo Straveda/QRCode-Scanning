@@ -35,9 +35,43 @@ function EditProductModal({ isOpen, onClose, productId, onProductUpdated }) {
             setDescriptionType(data.description_type || "paragraph");
             setVideoUrl(data.video_url || "");
             setKeywords(data.keywords || "");
-            setDoses(data.dose && data.dose.length > 0 ? data.dose : [{ crops: "", dose: "" }]);
-            setCompositions(data.composition && data.composition.length > 0 ? data.composition : [{ ingredients: "", content: "" }]);
-            setSpecifications(data.specifications && data.specifications.length > 0 ? data.specifications : [{ parameters: "", value: "" }]);
+            
+            const parseTableData = (val) => {
+                if (!val) return [{ crops: "", dose: "" }]; // Default structure
+                if (Array.isArray(val)) return val.length > 0 ? val : [{ crops: "", dose: "" }];
+                try {
+                    const parsed = typeof val === 'string' ? JSON.parse(val) : val;
+                    return Array.isArray(parsed) && parsed.length > 0 ? parsed : [{ crops: "", dose: "" }];
+                } catch (e) {
+                    return [{ crops: "", dose: "" }];
+                }
+            };
+
+            const parseCompData = (val) => {
+                if (!val) return [{ ingredients: "", content: "" }];
+                if (Array.isArray(val)) return val.length > 0 ? val : [{ ingredients: "", content: "" }];
+                try {
+                    const parsed = typeof val === 'string' ? JSON.parse(val) : val;
+                    return Array.isArray(parsed) && parsed.length > 0 ? parsed : [{ ingredients: "", content: "" }];
+                } catch (e) {
+                    return [{ ingredients: "", content: "" }];
+                }
+            };
+
+            const parseSpecData = (val) => {
+                if (!val) return [{ parameters: "", value: "" }];
+                if (Array.isArray(val)) return val.length > 0 ? val : [{ parameters: "", value: "" }];
+                try {
+                    const parsed = typeof val === 'string' ? JSON.parse(val) : val;
+                    return Array.isArray(parsed) && parsed.length > 0 ? parsed : [{ parameters: "", value: "" }];
+                } catch (e) {
+                    return [{ parameters: "", value: "" }];
+                }
+            };
+
+            setDoses(parseTableData(data.dose));
+            setCompositions(parseCompData(data.composition));
+            setSpecifications(parseSpecData(data.specifications));
             setPreview(data.image_url);
             setLoading(false);
         } catch (err) {
